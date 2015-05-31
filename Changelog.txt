@@ -1,0 +1,97 @@
+1.01.300
+real distributions can have argument for decimal places
+- default is now 2 decimals
+
+1.01.200
+- Remove quotes now when doing a value replace in everywhere EXCEPT a genif (since quotes are needed to evaluation things) - pass a genif flag? to replacevaluereferences and any other with genif
+- Fixed a bug where a distribution line in the program section and an inline distribution results in a "distribution already used" error for the first line
+--Added to spec-genmath, TEST6
+- Parsing file code was made less confusing (Original complaint: - The biggest problem I think is that the parsing file code is very confusing, and needs to be redone so adding new features would be easier. However, the fact that it takes up so little runtime, it's very hard to justify work on it. That makes the biggest problem finding the justification to do this.)
+ - Removed parseGenesisLineTop, redundant, things happen in multiple places
+ - Cleaned up parse functions from that
+- Comments and generic cleanups
+
+
+1.01.101
+Small simplifications, concat test, quotes removed by itself
+
+1.01.100
+Random seed using seed=x
+
+1.01.000
+Dynamic arrays now work for values
+-Added new DP, DQ, DR, DS testcases (bounds and array errors)
+Added code that counts constructs/codes
+
+1.00.310
+Cleaned up some errors/error messages: CZ, E1, F1, DM, DN
+
+1.00.300
+-Genmath improvements
+  - now allowed in the program and global sections (more confidently)
+  - semicolons in adhoc sampling is allowed
+  - adhoc is allowed in a genif
+  - square brackets (array usage) is allowed
+-Genif and genloop in program/global (more confidently) works now
+  
+1.00.210
+-badflags added to genloops (during an iteration) and in other places
+
+1.00.205
+-badflags added to quickly end a program when it fails a genassert
+
+1.00.200
+-enabled genassert
+
+1.00.100
+-added an escape hatch, hopefully this stops all infinite loops caused by a bad compiler (gives a warning to the user)
+
+1.00.05
+-fixed a bug where a sequence of genif(T)genif(F)genelse(T) results in a codepath of (TFF) unless there's a line between the first 2.
+	-added both cases to testcase Genif 
+-fixed a minor bug where no global section warning (Warning WJ) wasn't properly detected
+-fixed a bug where enumerating a non-existent distribution gave an error
+	-New testcase ErrorH2
+
+1.00.04
+-fixed a bug where program values did not propagate properly if used genmath in a feature and used in a different feature in the template code
+	-added to testcase naming
+-fixed a bug where non-sampled values were detected correctly in features, but went undetected in program code, led to ZZ error
+	-added to testcase ErrorDK
+
+1.00.03
+-fixed a bug where using the same value in a genif/genelse raised an error (2 genif constructs with the same value worked)
+	-added to testcase Genif
+-made default with no header comments
+-added information on Template program in header comments
+
+1.00.025
+-minor edits to commenting
+
+1.0.02
+-fixed a bug where passing in +, -, *, didn't work due to regexes
+-fixed a bug where passing in () didn't work due to the outside brackets
+	-added but to testcase arguments
+
+1.0.01
+-fixed a bug where using enumerate causes it to forget distributions declared in the global/program sections
+
+1.0.0
+
+	CONSIDERATIONS	
+		perl processing string, inefficiencies, lex and yacc/speeds of languages
+		modifiers: real sampling, normal distribution
+		security hole for booleans?
+		unknown number of arguments
+		
+	TESTCASES
+		flagoptions
+		data decomposition
+		non divisible
+	
+	POSSIBLE FUTURE WORK
+		partial sampling (needed since we added add/remove for values? noreplacement over time? distinct?)
+		Generate the host program
+		function that returns value (convenience)
+		Allow enumerate in features
+		vim highlighting for keywords - different file extension... not sustainable, other languages

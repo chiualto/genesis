@@ -1,0 +1,49 @@
+/// C language program
+
+	feature singleline(1) keepLive (dest, varlist)
+		${dest} = 
+		genloop i:1:${${varlist}}
+			${varlist}${i}
+			genif ${${varlist}(size)}!=${i}
+				 + 
+			end
+		end
+		;
+	end
+
+	feature singleline(1) keepliveold (dest, varlist)
+		${dest} = 
+		genloop ${${varlist}}>0
+			variable final from ${varlist}
+			${final} 
+			remove final from ${varlist}
+			genif ${${varlist}}!=0
+				+ 
+			end
+		end
+		add all to temp
+		;
+	end
+
+	feature varlistDeclare (type, varlist)
+		genloop i:1:${${varlist}}
+			${type} ${varlist}${i} = 0;
+		end
+	end
+
+	feature gentab
+			
+	end
+	
+		feature varlistdeclareold (type, varlist)
+		genloop ${${varlist}}>0
+			variable final from ${varlist}
+			${type} ${final} = 0;
+			remove final from ${varlist}
+		end
+		add all to ${varlist}
+	end
+
+	feature gentab
+			
+	end
